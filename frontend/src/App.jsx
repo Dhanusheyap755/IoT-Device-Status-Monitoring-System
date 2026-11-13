@@ -9,10 +9,30 @@ import AlertsPage from './pages/AlertsPage';
 import FsmVisualizerPage from './pages/FsmVisualizerPage';
 import SimulationControlsPage from './pages/SimulationControlsPage';
 import FsmExplanationPage from './pages/FsmExplanationPage';
-import { api } from './services/api';
+import { api, API_BASE_URL } from './services/api';
+
+const VALID_TABS = [
+  'overview',
+  'devices',
+  'sensors',
+  'alerts',
+  'fsm-visualizer',
+  'simulation',
+  'fsm-explanation',
+];
+
+const getInitialTab = () => {
+  if (typeof window !== 'undefined' && window.location.hash) {
+    const hash = window.location.hash.replace(/^#\/?/, '').trim();
+    if (VALID_TABS.includes(hash)) {
+      return hash;
+    }
+  }
+  return 'overview';
+};
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTabState] = useState(getInitialTab);
   const [health, setHealth] = useState(null);
   const [stats, setStats] = useState(null);
   const [devices, setDevices] = useState([]);
@@ -22,11 +42,32 @@ export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [serverError, setServerError] = useState(null);
 
-  // Load all dashboard state
+  // Synchronize hash with active tab for GitHub Pages refresh safety
+  const setActiveTab = (tab) => {
+    if (VALID_TABS.includes(tab)) {
+      setActiveTabState(tab);
+      if (typeof window !== 'undefined') {
+        window.location.hash = `#${tab}`;
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace(/^#\/?/, '').trim();
+      if (VALID_TABS.includes(hash)) {
+        setActiveTabState(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Load all dashboard state from backend
   const loadDashboardData = useCallback(async () => {
     setIsRefreshing(true);
     try {
-      // 1. Fetch Health (always available even if DB degraded)
+      // 1. Fetch Health (always accessible, reports DB connectivity)
       const healthRes = await api.getHealth().catch((err) => {
         setServerError(err.message);
         return null;
@@ -36,7 +77,7 @@ export default function App() {
         setHealth(healthRes);
         setServerError(null);
 
-        // 2. If database is connected, fetch operational collections
+        // 2. If database is connected, fetch live operational collections
         if (healthRes.database?.connected) {
           const [devicesRes, statsRes, alertsRes, readingsRes] = await Promise.all([
             api.getDevices().catch(() => ({ data: [] })),
@@ -106,16 +147,16 @@ export default function App() {
         {(!health || !health.database?.connected) && (
           <div className="bg-amber-500 text-amber-950 px-6 py-2.5 text-xs flex items-center justify-between border-b border-amber-600 shadow-xs">
             <div className="flex items-center gap-2">
-              <span className="font-bold">⚠️ Notice:</span>
+              <span className="font-bold">⚠️ Connection Notice:</span>
               <span>
                 {serverError
-                  ? `Backend unreachable: ${serverError}. Start Express with "npm start" in backend/.`
-                  : 'MongoDB connection is currently offline or connecting. Start MongoDB with "mongod" or configure MONGODB_URI in backend/.env.'}
+                  ? `${serverError} (Target API: ${API_BASE_URL})`
+                  : 'Backend is connected, but MongoDB is offline. Verify MONGODB_URI in Render environment variables or start local mongod.'}
               </span>
             </div>
             <button
               onClick={loadDashboardData}
-              className="px-2.5 py-1 bg-amber-900 text-amber-100 rounded text-[11px] font-semibold hover:bg-amber-950 transition-colors"
+              className="px-2.5 py-1 bg-amber-900 text-amber-100 rounded text-[11px] font-semibold hover:bg-amber-950 transition-colors shrink-0"
             >
               Retry Connection
             </button>

@@ -262,7 +262,19 @@ git push -u origin main
 
 ---
 
-## 12. Troubleshooting Common Issues
+## 12. Public Cloud Deployment (GitHub Pages + Render + MongoDB Atlas)
+
+A complete step-by-step production deployment manual is provided in [`documentation/DEPLOYMENT_GUIDE.md`](documentation/DEPLOYMENT_GUIDE.md).
+
+### Deployment Summary:
+- **Frontend Hosting:** GitHub Pages (`https://<YOUR-USERNAME>.github.io/IoT-Device-Status-Monitoring-System/`)
+- **Backend Hosting:** Render Web Service (`https://<YOUR-RENDER-BACKEND-URL>.onrender.com`)
+- **Database:** MongoDB Atlas (Cloud Cluster M0)
+- **CI/CD:** Automated GitHub Actions workflow (`.github/workflows/deploy.yml`) builds React with repository variable `VITE_API_BASE_URL` and deploys automatically upon pushing to `main`.
+
+---
+
+## 13. Troubleshooting Common Issues
 
 1. **MongoDB Connection Warning (HTTP 503):**
    - Ensure `mongod` is running on your machine or configure `MONGODB_URI` in `backend/.env`.

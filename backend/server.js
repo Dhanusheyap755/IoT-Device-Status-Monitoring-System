@@ -14,17 +14,39 @@ const readingRoutes = require('./routes/readingRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for frontend client
-const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+// Enable CORS for frontend clients (GitHub Pages production, Render, and local development)
+const configuredFrontend = process.env.FRONTEND_URL;
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or Postman)
-      if (!origin || origin === allowedOrigin || origin.startsWith('http://localhost:')) {
-        callback(null, true);
-      } else {
-        callback(null, true); // Permissive for local college evaluation environments
+      // 1. Allow non-browser requests (no origin header, like curl, uptime monitors, Postman)
+      if (!origin) {
+        return callback(null, true);
       }
+
+      // 2. Allow explicitly configured FRONTEND_URL
+      if (configuredFrontend && (origin === configuredFrontend || origin.startsWith(configuredFrontend))) {
+        return callback(null, true);
+      }
+
+      // 3. Allow GitHub Pages domains (*.github.io)
+      if (/^https:\/\/[a-zA-Z0-9-]+\.github\.io(\/.*)?$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 4. Allow local development (localhost / 127.0.0.1 on any port)
+      if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 5. Allow Render preview and production domains (*.onrender.com)
+      if (/^https:\/\/[a-zA-Z0-9-]+\.onrender\.com$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // Permissive fallback to support academic evaluations across different networks
+      return callback(null, true);
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -54,9 +76,10 @@ app.get('/', (req, res) => {
     project: 'IoT Device Status Monitoring System',
     author: 'Register No: 24ITR018',
     institution: 'Velalar College of Engineering and Technology, Erode',
-    department: 'Information Technology',
+    department: 'Department of Information Technology',
     documentation: '/api/health',
     status: 'Running',
+    serverTime: new Date().toISOString(),
   });
 });
 
@@ -91,9 +114,10 @@ async function startServer() {
     console.warn('[Warning] Running with Database offline. Real operations will return 503 until MongoDB is online.');
   }
 
-  server = app.listen(PORT, () => {
-    console.log(`[Server] Express server listening on http://localhost:${PORT}`);
-    console.log(`[Server] Health check available at http://localhost:${PORT}/api/health`);
+  // Bind to 0.0.0.0 for Render compatibility
+  server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`[Server] Express server listening on 0.0.0.0:${PORT}`);
+    console.log(`[Server] Health check available at /api/health`);
   });
 
   return server;

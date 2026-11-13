@@ -1,12 +1,23 @@
 /**
  * Frontend REST API Service for IoT Device Status Monitoring System
  * Handles communication between React UI and Express Backend
+ * Supports both local development (http://localhost:5000/api) and
+ * production deployments via VITE_API_BASE_URL (Render backend)
  */
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const rawApiUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:5000/api';
+
+// Normalize URL: Strip trailing slash and ensure /api endpoint prefix
+const cleanUrl = rawApiUrl.replace(/\/+$/, '');
+export const API_BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
 
 async function request(endpoint, options = {}) {
-  const url = `${BASE_URL}${endpoint}`;
+  const formattedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${API_BASE_URL}${formattedEndpoint}`;
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +41,7 @@ async function request(endpoint, options = {}) {
   } catch (err) {
     if (err.name === 'TypeError' && err.message.includes('fetch')) {
       const connErr = new Error(
-        'Unable to reach backend server. Please verify Express is running on http://localhost:5000'
+        `Unable to reach backend API at ${API_BASE_URL}. If deployed on Render, please allow up to 60 seconds for the free instance to spin up.`
       );
       connErr.status = 0;
       throw connErr;
@@ -40,6 +51,9 @@ async function request(endpoint, options = {}) {
 }
 
 export const api = {
+  // Base URL introspection
+  getBaseUrl: () => API_BASE_URL,
+
   // Health & Stats
   getHealth: () => request('/health'),
   getStats: () => request('/devices/stats'),
