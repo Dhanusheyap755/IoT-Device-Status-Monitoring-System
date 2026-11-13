@@ -1,0 +1,21 @@
+stateDiagram-v2
+    [*] --> Registered : Initial Provision (q0)
+
+    %% Registered Transitions
+    Registered --> Active : ValidMessage [Promote & Store Reading]
+    Registered --> Disconnected : CommunicationFailure [Alert: Error]
+    Registered --> Disconnected : Timeout [Alert: Warning]
+    Registered --> Registered : InvalidMessage [Alert: Warning / State Unchanged]
+
+    %% Active Transitions
+    Active --> Active : ValidMessage [Self Loop: Telemetry Update]
+    Active --> Disconnected : CommunicationFailure [Outage Alert]
+    Active --> Disconnected : Timeout [Silence Window Expiration]
+    Active --> Active : InvalidMessage [Self Loop: Payload Rejected]
+
+    %% Disconnected Transitions
+    Disconnected --> Active : ValidMessage [Automatic Recovery]
+    Disconnected --> Active : Reconnect [Operator Reconnection]
+    Disconnected --> Disconnected : CommunicationFailure [Persistent Outage]
+    Disconnected --> Disconnected : Timeout [Persistent Timeout]
+    Disconnected --> Disconnected : InvalidMessage [Self Loop: Payload Rejected]

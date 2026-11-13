@@ -1,0 +1,6 @@
+{
+  "deviceId": "IOT001",
+  "temperature": 28.5,
+  "humidity": 62.0,
+  "status": "online"
+}
