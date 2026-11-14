@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Activity 2 - IoT Device Status Monitoring System - 24ITR018</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 10mm 12mm 10mm;
+    }
+    body {
+      font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.35;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+      background: #FFFFFF;
+    }
+    .cover-page {
+      text-align: center;
+      padding: 20px 10px;
+      page-break-after: always;
+    }
+    .college-header h1 {
+      font-size: 15pt;
+      color: #1E3A8A;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .college-header p {
+      margin: 2px 0;
+      font-size: 9.5pt;
+      color: #4B5563;
+    }
+    .college-header .dept {
+      font-weight: bold;
+      color: #1E40AF;
+      font-size: 11pt;
+      margin-top: 4px;
+    }
+    .divider {
+      border: 0;
+      border-top: 1.5px solid #1E3A8A;
+      margin: 12px auto;
+      width: 90%;
+    }
+    .report-badge {
+      display: inline-block;
+      background: #EFF6FF;
+      color: #1E40AF;
+      border: 1.5px solid #BFDBFE;
+      padding: 4px 18px;
+      border-radius: 20px;
+      font-size: 11pt;
+      font-weight: 700;
+      margin-top: 15px;
+      letter-spacing: 1px;
+    }
+    .project-title {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #1E3A8A;
+      margin: 16px 0 25px 0;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .student-card {
+      border: 1.5px solid #1E3A8A;
+      border-radius: 8px;
+      background: #F8FAFC;
+      width: 85%;
+      margin: 0 auto;
+      text-align: left;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+    .student-card td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .student-card tr:last-child td {
+      border-bottom: none;
+    }
+    .student-card td.lbl {
+      font-weight: 700;
+      color: #1E3A8A;
+      width: 38%;
+      background: #F1F5F9;
+    }
+    .student-card td.val {
+      font-weight: 600;
+      color: #0F172A;
+    }
+    .sig-row {
+      margin-top: 70px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    .sig-box {
+      text-align: center;
+      width: 200px;
+      border-top: 1px solid #334155;
+      padding-top: 5px;
+      font-weight: 700;
+      font-size: 9.5pt;
+    }
+
+    /* Common Section Styles */
+    h2.section-heading {
+      font-size: 13pt;
+      color: #1E3A8A;
+      border-bottom: 1.5px solid #1E3A8A;
+      padding-bottom: 3px;
+      margin: 12px 0 8px 0;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+
+    /* Path Structure Pre */
+    pre.path-tree {
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      padding: 8px 10px;
+      font-family: 'Consolas', monospace;
+      font-size: 8pt;
+      line-height: 1.25;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+
+    /* 2-COLUMN CODE SECTION (MAXIMUM PAPER SAVING) */
+    .two-column-layout {
+      column-count: 2;
+      column-gap: 14px;
+      column-rule: 1px solid #CBD5E1;
+      margin-top: 8px;
+    }
+    .file-wrapper {
+      break-inside: auto;
+      margin-bottom: 8px;
+    }
+    .file-title {
+      background: #1E3A8A;
+      color: #FFFFFF;
+      font-family: 'Consolas', monospace;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 3px 3px 0 0;
+      margin: 0;
+      break-after: avoid;
+    }
+    pre.code-content {
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-top: none;
+      padding: 4px 6px;
+      font-family: 'Consolas', monospace;
+      font-size: 6.8pt;
+      line-height: 1.15;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0 0 8px 0;
+      border-radius: 0 0 3px 3px;
+      color: #0F172A;
+    }
+
+    /* OUTPUT & SCREENSHOT PAGES (FULL WIDTH SINGLE COLUMN) */
+    .screenshot-page {
+      page-break-before: always;
+    }
+    .shot-box {
+      border: 2px dashed #94A3B8;
+      background: #F8FAFC;
+      border-radius: 8px;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 15px;
+      margin: 12px 0 6px 0;
+    }
+    .shot-tag {
+      font-weight: 800;
+      color: #1E40AF;
+      font-size: 11pt;
+      margin-bottom: 5px;
+    }
+    .shot-desc {
+      color: #64748B;
+      font-size: 9pt;
+      max-width: 520px;
+      line-height: 1.3;
+    }
+    .caption {
+      text-align: center;
+      font-size: 9pt;
+      font-style: italic;
+      color: #475569;
+      margin-bottom: 15px;
+    }
+
+    table.link-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 9.5pt;
+    }
+    table.link-table th, table.link-table td {
+      border: 1px solid #CBD5E1;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    table.link-table th {
+      background: #F1F5F9;
+      color: #1E293B;
+      font-weight: 700;
+    }
+    code.url {
+      font-family: 'Consolas', monospace;
+      color: #1D4ED8;
+      font-size: 8.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== FRONT SHEET ==================== -->
+  <div class="cover-page">
+    <div class="college-header">
+      <h1>VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h1>
+      <p>(Autonomous Institution Affiliated to Anna University, Chennai)</p>
+      <p class="dept">DEPARTMENT OF INFORMATION TECHNOLOGY</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="report-badge">ACTIVITY 2 REPORT</div>
+    <div class="project-title">IoT Device Status Monitoring System</div>
+
+    <table class="student-card">
+      <tr>
+        <td class="lbl">Student Name:</td>
+        <td class="val">DHANUSHEYA P</td>
+      </tr>
+      <tr>
+        <td class="lbl">Register Number:</td>
+        <td class="val">24ITR018</td>
+      </tr>
+      <tr>
+        <td class="lbl">Degree & Branch:</td>
+        <td class="val">B.Tech. - Information Technology</td>
+      </tr>
+      <tr>
+        <td class="lbl">Course Code & Title:</td>
+        <td class="val">Full Stack Web Development & Formal Languages and Automata Theory</td>
+      </tr>
+      <tr>
+        <td class="lbl">Activity Number:</td>
+        <td class="val">Activity 2</td>
+      </tr>
+      <tr>
+        <td class="lbl">Project Number:</td>
+        <td class="val">18</td>
+      </tr>
+      <tr>
+        <td class="lbl">Date of Submission:</td>
+        <td class="val">14-11-2026</td>
+      </tr>
+    </table>
+
+    <div class="sig-row">
+      <div class="sig-box">Signature of the Student</div>
+      <div class="sig-box">Signature of Faculty In-Charge</div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 1: PATH ==================== -->
+  <div class="page-break"></div>
+  <h2 class="section-heading">1. PATH OF FILES AND FOLDERS</h2>
+  <pre class="path-tree">IoT-Device-Status-Monitoring-System/
+├── .github/workflows/deploy.yml                      # GitHub Actions CI/CD to GitHub Pages
+├── backend/
+│   ├── config/db.js                                  # MongoDB Atlas Cloud Database connection logic
+│   ├── controllers/
+│   │   ├── alertController.js                        # Alert query & dismissal handlers
+│   │   ├── deviceController.js                       # Device state, CRUD, & simulation endpoints
+│   │   └── readingController.js                      # Time-series telemetry querying
+│   ├── fsm/deviceStateMachine.js                     # FLAT Deterministic Finite Automaton Engine
+│   ├── middleware/
+│   │   ├── errorHandler.js                           # Centralized error handler & DB readiness guard
+│   │   └── validateMessage.js                        # Ingestion payload schema validation middleware
+│   ├── models/
+│   │   ├── Alert.js                                  # Anomaly & validation error schema
+│   │   ├── Device.js                                 # IoT Device model (Registered, Active, Disconnected)
+│   │   ├── DeviceEvent.js                            # Non-repudiable state transition audit ledger
+│   │   └── SensorReading.js                          # Validated sensor telemetry records
+│   ├── routes/
+│   │   ├── alertRoutes.js                            # Express REST endpoints for alerts
+│   │   ├── deviceRoutes.js                           # Express REST endpoints for device & simulation
+│   │   └── readingRoutes.js                          # Express REST endpoints for telemetry
+│   ├── seed/seedData.js                              # Database seeder (IOT001, IOT002, IOT003)
+│   ├── .env.example                                  # Template for environment configuration
+│   ├── package.json                                  # Backend dependencies and startup scripts
+│   └── server.js                                     # Express entry point with 0.0.0.0 & CORS binding
+├── frontend/
+│   ├── public/favicon.svg                            # Application vector branding icon
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AlertBadge.jsx                        # Severity badges (Info, Warning, Error)
+│   │   │   ├── Footer.jsx                            # Professional attribution footer (Reg: 24ITR018)
+│   │   │   ├── Header.jsx                            # Header with real-time MongoDB connectivity pulse
+│   │   │   ├── Icons.jsx                             # Self-contained SVG icon components
+│   │   │   ├── MetricCard.jsx                        # Executive summary KPI cards
+│   │   │   ├── Sidebar.jsx                           # Left navigation drawer
+│   │   │   └── StatusPill.jsx                        # Automata state indicator pills
+│   │   ├── pages/
+│   │   │   ├── AlertsPage.jsx                        # Exception and failure audit logs
+│   │   │   ├── DeviceManagementPage.jsx              # Device registration with format validation
+│   │   │   ├── FsmExplanationPage.jsx                # Theoretical FLAT automata specification
+│   │   │   ├── FsmVisualizerPage.jsx                 # Interactive automata node visualizer
+│   │   │   ├── OverviewDashboard.jsx                 # System metrics and status distribution
+│   │   │   ├── SensorMonitoringPage.jsx              # Telemetry readings with units (°C, % RH)
+│   │   │   └── SimulationControlsPage.jsx            # Live HTTP simulation deck & response inspector
+│   │   ├── services/api.js                           # Frontend API client supporting VITE_API_BASE_URL
+│   │   ├── App.css                                   # Global layout adjustments
+│   │   ├── App.jsx                                   # Main React component with URL hash routing
+│   │   ├── index.css                                 # Modern scrollbar & CSS utility rules
+│   │   └── main.jsx                                  # React DOM mounting entry point
+│   ├── index.html                                    # HTML5 Single Page Application shell
+│   ├── package.json                                  # Frontend dependencies (React 19, Vite)
+│   └── vite.config.js                                # Base path /IoT-Device-Status-Monitoring-System/
+├── sample-inputs/
+│   ├── communication-failure.json                    # Simulated packet drop payload
+│   ├── invalid-humidity.json                         # Out-of-bounds humidity (150%)
+│   ├── invalid-temperature.json                      # Out-of-bounds temperature (200°C)
+│   ├── missing-field.json                            # Payload missing mandatory deviceId
+│   ├── timeout.json                                  # Heartbeat timeout (45s) payload
+│   ├── unknown-device.json                           # Unregistered device ID payload
+│   └── valid-message.json                            # Authentic sensor telemetry payload
+├── .gitignore                                        # Excludes node_modules, build artifacts, & secrets
+└── README.md                                         # Comprehensive documentation & setup instructions</pre>
+
+  <!-- ==================== SECTION 2: CODE (TWO COLUMNS PER A4) ==================== -->
+  <div class="page-break"></div>
+  <h2 class="section-heading">2. APPLICATION SOURCE CODE (COMPACT 2-COLUMN FORMAT)</h2>
+  
+  <div class="two-column-layout">
+
+    <!-- backend/server.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/server.js</div>
+      <pre class="code-content">require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const { connectDB, isDbConnected, getDbState } = require('./config/db');
+const { requireDatabase, notFoundHandler, globalErrorHandler } = require('./middleware/errorHandler');
+const { seedDatabase } = require('./seed/seedData');
+
+const { getHealth, getDeviceHistory } = require('./controllers/deviceController');
+const deviceRoutes = require('./routes/deviceRoutes');
+const alertRoutes = require('./routes/alertRoutes');
+const readingRoutes = require('./routes/readingRoutes');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+const configuredFrontend = process.env.FRONTEND_URL;
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (configuredFrontend && (origin === configuredFrontend || origin.startsWith(configuredFrontend))) return callback(null, true);
+      if (/^https:\/\/[a-zA-Z0-9-]+\.github\.io(\/.*)?$/.test(origin)) return callback(null, true);
+      if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return callback(null, true);
+      if (/^https:\/\/[a-zA-Z0-9-]+\.onrender\.com$/.test(origin)) return callback(null, true);
+      return callback(null, true);
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+);
+
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    if (process.env.NODE_ENV !== 'test') console.log(`[HTTP] ${req.method} ${req.originalUrl} -> ${res.statusCode} (${duration}ms)`);
+  });
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.status(200).json({
+    project: 'IoT Device Status Monitoring System',
+    author: 'Register No: 24ITR018',
+    institution: 'Velalar College of Engineering and Technology, Erode',
+    department: 'Department of Information Technology',
+    documentation: '/api/health',
+    status: 'Running',
+    serverTime: new Date().toISOString(),
+  });
+});
+
+app.get('/api/health', getHealth);
+app.use('/api/devices', requireDatabase, deviceRoutes);
+app.use('/api/alerts', requireDatabase, alertRoutes);
+app.use('/api/readings', requireDatabase, readingRoutes);
+app.get('/api/history/:id', requireDatabase, getDeviceHistory);
+
+app.use(notFoundHandler);
+app.use(globalErrorHandler);
+
+let server;
+async function startServer() {
+  console.log('========================================================');
+  console.log(' IoT Device Status Monitoring System - Backend Server   ');
+  console.log(' Student: 24ITR018 | VCET Information Technology        ');
+  console.log('========================================================');
+  await connectDB();
+  if (isDbConnected()) await seedDatabase(false);
+  server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`[Server] Express server listening on 0.0.0.0:${PORT}`);
+  });
+  return server;
+}
+
+if (require.main === module) startServer();
+process.on('SIGINT', async () => {
+  if (server) server.close();
+  process.exit(0);
+});
+
+module.exports = { app, startServer };</pre>
+    </div>
+
+    <!-- backend/config/db.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/config/db.js</div>
+      <pre class="code-content">const mongoose = require('mongoose');
+
+mongoose.connection.on('connected', () => {
+  console.log(`[MongoDB Event] Connected: ${mongoose.connection.host}/${mongoose.connection.name}`);
+});
+mongoose.connection.on('error', (err) => console.error(`[MongoDB Event] Error: ${err.message}`));
+mongoose.connection.on('disconnected', () => console.warn('[MongoDB Event] Disconnected.'));
+
+const connectDB = async () => {
+  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/iot_monitoring';
+  try {
+    const conn = await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 8000,
+      connectTimeoutMS: 10000,
+    });
+    console.log(`[MongoDB] Connected successfully: ${conn.connection.host}/${conn.connection.name}`);
+    return conn;
+  } catch (error) {
+    console.error(`[MongoDB] Connection error: ${error.message}`);
+    return null;
+  }
+};
+
+const isDbConnected = () => mongoose.connection.readyState === 1;
+const getDbState = () => {
+  const states = ['Disconnected', 'Connected', 'Connecting', 'Disconnecting'];
+  const code = mongoose.connection.readyState;
+  return { code, name: states[code] || 'Unknown', host: mongoose.connection.host || null, dbName: mongoose.connection.name || null };
+};
+
+module.exports = { connectDB, isDbConnected, getDbState };</pre>
+    </div>
+
+    <!-- backend/fsm/deviceStateMachine.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/fsm/deviceStateMachine.js</div>
+      <pre class="code-content">/**
+ * FSM Module - FLAT DFA Engine
+ * M = (Q, Σ, δ, q0, F)
+ * Q = {Registered, Active, Disconnected}
+ * Σ = {ValidMessage, InvalidMessage, CommunicationFailure, Timeout, Reconnect}
+ * q0 = Registered, F = {Active}
+ */
+const DeviceEvent = require('../models/DeviceEvent');
+const Alert = require('../models/Alert');
+
+const STATES = { REGISTERED: 'Registered', ACTIVE: 'Active', DISCONNECTED: 'Disconnected' };
+const EVENTS = {
+  VALID_MESSAGE: 'ValidMessage',
+  INVALID_MESSAGE: 'InvalidMessage',
+  COMMUNICATION_FAILURE: 'CommunicationFailure',
+  TIMEOUT: 'Timeout',
+  RECONNECT: 'Reconnect',
+};
+
+const TRANSITION_TABLE = {
+  [STATES.REGISTERED]: {
+    [EVENTS.VALID_MESSAGE]: { nextState: STATES.ACTIVE, action: 'Promote to Active and save reading', createsAlert: false },
+    [EVENTS.INVALID_MESSAGE]: { nextState: STATES.REGISTERED, action: 'Maintain Registered, reject payload, log alert', createsAlert: true, alertType: 'INVALID_MESSAGE', severity: 'Warning' },
+    [EVENTS.COMMUNICATION_FAILURE]: { nextState: STATES.DISCONNECTED, action: 'Demote to Disconnected due to outage', createsAlert: true, alertType: 'COMMUNICATION_FAILURE', severity: 'Error' },
+    [EVENTS.TIMEOUT]: { nextState: STATES.DISCONNECTED, action: 'Demote to Disconnected on timeout', createsAlert: true, alertType: 'TIMEOUT', severity: 'Warning' },
+    [EVENTS.RECONNECT]: { nextState: STATES.ACTIVE, action: 'Activate via operator reconnection', createsAlert: true, alertType: 'RECONNECTION', severity: 'Info' },
+  },
+  [STATES.ACTIVE]: {
+    [EVENTS.VALID_MESSAGE]: { nextState: STATES.ACTIVE, action: 'Maintain Active (Self Loop), save telemetry', createsAlert: false },
+    [EVENTS.INVALID_MESSAGE]: { nextState: STATES.ACTIVE, action: 'Maintain Active (Self Loop), reject payload, log alert', createsAlert: true, alertType: 'INVALID_MESSAGE', severity: 'Warning' },
+    [EVENTS.COMMUNICATION_FAILURE]: { nextState: STATES.DISCONNECTED, action: 'Demote to Disconnected on outage', createsAlert: true, alertType: 'COMMUNICATION_FAILURE', severity: 'Error' },
+    [EVENTS.TIMEOUT]: { nextState: STATES.DISCONNECTED, action: 'Demote to Disconnected on keepalive timeout', createsAlert: true, alertType: 'TIMEOUT', severity: 'Warning' },
+    [EVENTS.RECONNECT]: { nextState: STATES.ACTIVE, action: 'Reaffirm Active state', createsAlert: true, alertType: 'RECONNECTION', severity: 'Info' },
+  },
+  [STATES.DISCONNECTED]: {
+    [EVENTS.VALID_MESSAGE]: { nextState: STATES.ACTIVE, action: 'Auto-reconnect to Active upon valid message', createsAlert: true, alertType: 'RECONNECTION', severity: 'Info' },
+    [EVENTS.INVALID_MESSAGE]: { nextState: STATES.DISCONNECTED, action: 'Maintain Disconnected (Self Loop), reject payload', createsAlert: true, alertType: 'INVALID_MESSAGE', severity: 'Warning' },
+    [EVENTS.COMMUNICATION_FAILURE]: { nextState: STATES.DISCONNECTED, action: 'Maintain Disconnected, log error alert', createsAlert: true, alertType: 'COMMUNICATION_FAILURE', severity: 'Error' },
+    [EVENTS.TIMEOUT]: { nextState: STATES.DISCONNECTED, action: 'Maintain Disconnected, log timeout alert', createsAlert: true, alertType: 'TIMEOUT', severity: 'Warning' },
+    [EVENTS.RECONNECT]: { nextState: STATES.ACTIVE, action: 'Restore to Active via operator reconnect', createsAlert: true, alertType: 'RECONNECTION', severity: 'Info' },
+  },
+};
+
+function evaluateTransition(currentState, event) {
+  if (!TRANSITION_TABLE[currentState]) throw new Error(`Invalid state: "${currentState}"`);
+  const transition = TRANSITION_TABLE[currentState][event];
+  if (!transition) throw new Error(`Invalid event: "${event}" for state "${currentState}"`);
+  return { previousState: currentState, event, nextState: transition.nextState, stateChanged: currentState !== transition.nextState, action: transition.action, createsAlert: transition.createsAlert, alertType: transition.alertType || null, severity: transition.severity || 'Info' };
+}
+
+async function processFSMTransition(device, event, options = {}) {
+  const currentState = device.state;
+  const evaluation = evaluateTransition(currentState, event);
+  const transitionTimestamp = new Date();
+  const previousState = device.state;
+  device.state = evaluation.nextState;
+  device.lastSeen = transitionTimestamp;
+  if (options.temperature !== undefined && options.temperature !== null) device.temperature = options.temperature;
+  if (options.humidity !== undefined && options.humidity !== null) device.humidity = options.humidity;
+  if (typeof device.save === 'function') await device.save();
+
+  const eventRecord = new DeviceEvent({
+    deviceId: device.deviceId, previousState, event, currentState: evaluation.nextState,
+    details: { action: evaluation.action, stateChanged: evaluation.stateChanged, reason: options.reason || null, ...options.metadata },
+    timestamp: transitionTimestamp,
+  });
+  await eventRecord.save();
+
+  let alertRecord = null;
+  if (evaluation.createsAlert || options.forceAlert) {
+    alertRecord = new Alert({
+      deviceId: device.deviceId, alertType: options.alertType || evaluation.alertType || 'SYSTEM_INFO',
+      message: options.alertMessage || `Device ${device.deviceId} triggered event '${event}'. State is now [${evaluation.nextState}].`,
+      severity: options.severity || evaluation.severity || 'Warning',
+      details: { previousState, currentState: evaluation.nextState, event, reason: options.reason || null, ...options.metadata },
+      createdAt: transitionTimestamp,
+    });
+    await alertRecord.save();
+  }
+  return { success: true, deviceId: device.deviceId, previousState, event, currentState: evaluation.nextState, stateChanged: evaluation.stateChanged, action: evaluation.action, timestamp: transitionTimestamp, alert: alertRecord };
+}
+
+module.exports = { STATES, EVENTS, TRANSITION_TABLE, evaluateTransition, processFSMTransition };</pre>
+    </div>
+
+    <!-- backend/middleware/validateMessage.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/middleware/validateMessage.js</div>
+      <pre class="code-content">const Device = require('../models/Device');
+const Alert = require('../models/Alert');
+const { processFSMTransition, EVENTS } = require('../fsm/deviceStateMachine');
+
+const validateSensorMessage = async (req, res, next) => {
+  const { deviceId, temperature, humidity, status } = req.body || {};
+  const validationErrors = [];
+
+  if (!deviceId || typeof deviceId !== 'string' || deviceId.trim() === '') {
+    validationErrors.push('Device ID is mandatory.');
+  } else if (!/^IOT\d{3,}$/.test(deviceId.trim().toUpperCase())) {
+    validationErrors.push(`Device ID "${deviceId}" is invalid. Must match IOT001.`);
+  }
+
+  if (temperature === undefined || temperature === null || temperature === '') {
+    validationErrors.push('Temperature reading is mandatory.');
+  } else {
+    const tempNum = Number(temperature);
+    if (isNaN(tempNum) || typeof temperature === 'boolean') validationErrors.push(`Temperature must be a valid number.`);
+    else if (tempNum < -40 || tempNum > 125) validationErrors.push(`Temperature (${tempNum}°C) is out of range (-40°C to 125°C).`);
+  }
+
+  if (humidity === undefined || humidity === null || humidity === '') {
+    validationErrors.push('Humidity reading is mandatory.');
+  } else {
+    const humNum = Number(humidity);
+    if (isNaN(humNum) || typeof humidity === 'boolean') validationErrors.push(`Humidity must be a valid number.`);
+    else if (humNum < 0 || humNum > 100) validationErrors.push(`Humidity (${humNum}%) is out of range (0% to 100%).`);
+  }
+
+  if (!status || (status.trim().toLowerCase() !== 'online' && status.trim().toLowerCase() !== 'offline')) {
+    validationErrors.push('Status field must be "online" or "offline".');
+  }
+
+  if (validationErrors.length > 0) {
+    const targetId = typeof deviceId === 'string' && deviceId.trim() ? deviceId.trim().toUpperCase() : 'UNKNOWN';
+    let dev = null;
+    if (targetId !== 'UNKNOWN') { try { dev = await Device.findOne({ deviceId: targetId }); } catch(e){} }
+    if (dev) {
+      await processFSMTransition(dev, EVENTS.INVALID_MESSAGE, {
+        reason: validationErrors.join(' | '),
+        alertMessage: `Validation failed for ${targetId}: ${validationErrors.join('; ')}`,
+        severity: 'Warning', alertType: 'INVALID_MESSAGE', metadata: { rejectedPayload: req.body, errors: validationErrors }
+      });
+    } else {
+      await Alert.create({ deviceId: targetId, alertType: 'INVALID_MESSAGE', message: `Malformed message: ${validationErrors.join('; ')}`, severity: 'Error', details: { rejectedPayload: req.body } });
+    }
+    return res.status(400).json({ success: false, error: 'Validation Failed', deviceId: targetId, validationErrors, message: 'Payload rejected. State unchanged.' });
+  }
+
+  const cleanId = deviceId.trim().toUpperCase();
+  try {
+    const dev = await Device.findOne({ deviceId: cleanId });
+    if (!dev) return res.status(404).json({ success: false, error: 'Unknown Device ID', message: `Device ${cleanId} is not registered.` });
+    req.targetDevice = dev;
+    req.sanitizedPayload = { deviceId: cleanId, temperature: Number(temperature), humidity: Number(humidity), status: status.trim().toLowerCase() };
+    next();
+  } catch(err) {
+    return res.status(503).json({ success: false, error: 'Database Unavailable' });
+  }
+};
+module.exports = { validateSensorMessage };</pre>
+    </div>
+
+    <!-- backend/models/Device.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/models/Device.js</div>
+      <pre class="code-content">const mongoose = require('mongoose');
+
+const deviceSchema = new mongoose.Schema({
+  deviceId: { type: String, required: true, unique: true, uppercase: true, trim: true, match: /^IOT\d{3,}$/, index: true },
+  deviceName: { type: String, required: true, trim: true, minlength: 2, maxlength: 50 },
+  state: { type: String, enum: ['Registered', 'Active', 'Disconnected'], default: 'Registered', required: true },
+  temperature: { type: Number, default: null, min: -40, max: 125 },
+  humidity: { type: Number, default: null, min: 0, max: 100 },
+  lastSeen: { type: Date, default: Date.now },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Device', deviceSchema);</pre>
+    </div>
+
+    <!-- backend/models/SensorReading.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/models/SensorReading.js</div>
+      <pre class="code-content">const mongoose = require('mongoose');
+
+const sensorReadingSchema = new mongoose.Schema({
+  deviceId: { type: String, required: true, uppercase: true, trim: true, index: true },
+  temperature: { type: Number, required: true, min: -40, max: 125 },
+  humidity: { type: Number, required: true, min: 0, max: 100 },
+  status: { type: String, enum: ['online', 'offline'], default: 'online' },
+  receivedAt: { type: Date, default: Date.now, index: true },
+}, { timestamps: false });
+
+module.exports = mongoose.model('SensorReading', sensorReadingSchema);</pre>
+    </div>
+
+    <!-- backend/models/Alert.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/models/Alert.js</div>
+      <pre class="code-content">const mongoose = require('mongoose');
+
+const alertSchema = new mongoose.Schema({
+  deviceId: { type: String, required: true, uppercase: true, index: true },
+  alertType: { type: String, required: true, enum: ['INVALID_MESSAGE', 'COMMUNICATION_FAILURE', 'TIMEOUT', 'RECONNECTION', 'REGISTRATION', 'SYSTEM_INFO'], index: true },
+  message: { type: String, required: true, trim: true },
+  severity: { type: String, enum: ['Info', 'Warning', 'Error', 'Critical'], default: 'Warning', index: true },
+  details: { type: mongoose.Schema.Types.Mixed, default: null },
+  createdAt: { type: Date, default: Date.now, index: true },
+}, { timestamps: false });
+
+module.exports = mongoose.model('Alert', alertSchema);</pre>
+    </div>
+
+    <!-- backend/models/DeviceEvent.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/models/DeviceEvent.js</div>
+      <pre class="code-content">const mongoose = require('mongoose');
+
+const deviceEventSchema = new mongoose.Schema({
+  deviceId: { type: String, required: true, uppercase: true, index: true },
+  previousState: { type: String, required: true, enum: ['None', 'Registered', 'Active', 'Disconnected'] },
+  event: { type: String, required: true, enum: ['Register', 'ValidMessage', 'InvalidMessage', 'CommunicationFailure', 'Timeout', 'Reconnect'], index: true },
+  currentState: { type: String, required: true, enum: ['Registered', 'Active', 'Disconnected'] },
+  details: { type: mongoose.Schema.Types.Mixed, default: null },
+  timestamp: { type: Date, default: Date.now, index: true },
+}, { timestamps: false });
+
+module.exports = mongoose.model('DeviceEvent', deviceEventSchema);</pre>
+    </div>
+
+    <!-- backend/controllers/deviceController.js -->
+    <div class="file-wrapper">
+      <div class="file-title">backend/controllers/deviceController.js</div>
+      <pre class="code-content">const Device = require('../models/Device');
+const SensorReading = require('../models/SensorReading');
+const Alert = require('../models/Alert');
+const DeviceEvent = require('../models/DeviceEvent');
+const { getDbState, isDbConnected } = require('../config/db');
+const { STATES, EVENTS, processFSMTransition } = require('../fsm/deviceStateMachine');
+
+const getHealth = async (req, res) => {
+  const dbState = getDbState();
+  const isHealthy = isDbConnected();
+  res.status(isHealthy ? 200 : 503).json({
+    status: isHealthy ? 'healthy' : 'degraded',
+    project: 'IoT Device Status Monitoring System',
+    studentRegNo: '24ITR018',
+    database: { connected: isHealthy, state: dbState.name, host: dbState.host, databaseName: dbState.dbName },
+    fsmSpecification: { formalTuple: 'M = (Q, Σ, δ, q0, F)', states: Object.values(STATES), initialState: STATES.REGISTERED, activeState: STATES.ACTIVE }
+  });
+};
+
+const getAllDevices = async (req, res, next) => {
+  try {
+    const devices = await Device.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, count: devices.length, data: devices });
+  } catch(e) { next(e); }
+};
+
+const getDeviceById = async (req, res, next) => {
+  try {
+    const id = req.params.id.trim().toUpperCase();
+    const device = await Device.findOne({ $or: [{ deviceId: id }, { _id: id.match(/^[0-9a-fA-F]{24}$/) ? id : null }] });
+    if (!device) return res.status(404).json({ success: false, error: 'Device Not Found' });
+    const recentReadings = await SensorReading.find({ deviceId: device.deviceId }).sort({ receivedAt: -1 }).limit(10);
+    const recentEvents = await DeviceEvent.find({ deviceId: device.deviceId }).sort({ timestamp: -1 }).limit(10);
+    res.status(200).json({ success: true, data: { device, recentReadings, recentEvents } });
+  } catch(e) { next(e); }
+};
+
+const registerDevice = async (req, res, next) => {
+  try {
+    const { deviceId, deviceName } = req.body;
+    if (!deviceId || !deviceName) return res.status(400).json({ success: false, error: 'Device ID and Name mandatory' });
+    const fId = deviceId.trim().toUpperCase();
+    if (!/^IOT\d{3,}$/.test(fId)) return res.status(400).json({ success: false, error: 'Pattern IOT001 required' });
+    const existing = await Device.findOne({ deviceId: fId });
+    if (existing) return res.status(409).json({ success: false, error: 'Duplicate Device ID' });
+
+    const newDevice = new Device({ deviceId: fId, deviceName: deviceName.trim(), state: STATES.REGISTERED, lastSeen: new Date() });
+    await newDevice.save();
+    await DeviceEvent.create({ deviceId: fId, previousState: 'None', event: 'Register', currentState: STATES.REGISTERED, details: { deviceName }, timestamp: new Date() });
+    await Alert.create({ deviceId: fId, alertType: 'REGISTRATION', message: `Device ${fId} registered. Initial state [Registered].`, severity: 'Info' });
+    res.status(201).json({ success: true, data: newDevice });
+  } catch(e) { next(e); }
+};
+
+const postSensorMessage = async (req, res, next) => {
+  try {
+    const dev = req.targetDevice;
+    const { deviceId, temperature, humidity, status } = req.sanitizedPayload;
+    const reading = new SensorReading({ deviceId, temperature, humidity, status, receivedAt: new Date() });
+    await reading.save();
+    const transition = await processFSMTransition(dev, EVENTS.VALID_MESSAGE, { temperature, humidity, reason: 'Valid telemetry received' });
+    res.status(200).json({ success: true, data: { reading, device: dev, fsmTransition: transition } });
+  } catch(e) { next(e); }
+};
+
+const simulateFailure = async (req, res, next) => {
+  try {
+    const cleanId = (req.body?.deviceId || '').trim().toUpperCase();
+    const dev = await Device.findOne({ deviceId: cleanId });
+    if (!dev) return res.status(404).json({ success: false, error: 'Device Not Found' });
+    const transition = await processFSMTransition(dev, EVENTS.COMMUNICATION_FAILURE, { reason: req.body?.reason || 'Simulated packet loss', severity: 'Error', alertType: 'COMMUNICATION_FAILURE' });
+    res.status(200).json({ success: true, data: { deviceId: cleanId, currentState: transition.currentState } });
+  } catch(e) { next(e); }
+};
+
+const simulateTimeout = async (req, res, next) => {
+  try {
+    const cleanId = (req.body?.deviceId || '').trim().toUpperCase();
+    const dev = await Device.findOne({ deviceId: cleanId });
+    if (!dev) return res.status(404).json({ success: false, error: 'Device Not Found' });
+    const transition = await processFSMTransition(dev, EVENTS.TIMEOUT, { reason: 'Silence window exceeded', severity: 'Warning', alertType: 'TIMEOUT' });
+    res.status(200).json({ success: true, data: { deviceId: cleanId, currentState: transition.currentState } });
+  } catch(e) { next(e); }
+};
+
+const reconnectDevice = async (req, res, next) => {
+  try {
+    const cleanId = (req.params.id || '').trim().toUpperCase();
+    const dev = await Device.findOne({ deviceId: cleanId });
+    if (!dev) return res.status(404).json({ success: false, error: 'Device Not Found' });
+    const transition = await processFSMTransition(dev, EVENTS.RECONNECT, { reason: 'Operator reconnect', severity: 'Info', alertType: 'RECONNECTION' });
+    res.status(200).json({ success: true, data: { deviceId: cleanId, currentState: transition.currentState } });
+  } catch(e) { next(e); }
+};
+
+const getDeviceHistory = async (req, res, next) => {
+  try {
+    const id = req.params.id.trim().toUpperCase();
+    const history = await DeviceEvent.find({ deviceId: id }).sort({ timestamp: -1 });
+    res.status(200).json({ success: true, deviceId: id, data: history });
+  } catch(e) { next(e); }
+};
+
+const getSystemStats = async (req, res, next) => {
+  try {
+    const [total, active, disconnected, registered, readings, alerts] = await Promise.all([
+      Device.countDocuments(), Device.countDocuments({ state: STATES.ACTIVE }),
+      Device.countDocuments({ state: STATES.DISCONNECTED }), Device.countDocuments({ state: STATES.REGISTERED }),
+      SensorReading.countDocuments(), Alert.countDocuments()
+    ]);
+    res.status(200).json({ success: true, data: { summary: { totalDevices: total, activeDevices: active, disconnectedDevices: disconnected, registeredDevices: registered, totalReadings: readings, totalAlerts: alerts } } });
+  } catch(e) { next(e); }
+};
+
+module.exports = { getHealth, getAllDevices, getDeviceById, registerDevice, postSensorMessage, simulateFailure, simulateTimeout, reconnectDevice, getDeviceHistory, getSystemStats };</pre>
+    </div>
+
+    <!-- frontend/src/services/api.js -->
+    <div class="file-wrapper">
+      <div class="file-title">frontend/src/services/api.js</div>
+      <pre class="code-content">const rawApiUrl = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const cleanUrl = rawApiUrl.replace(/\/+$/, '');
+export const API_BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+
+async function request(endpoint, options = {}) {
+  const formatted = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${API_BASE_URL}${formatted}`;
+  const config = { headers: { 'Content-Type': 'application/json', ...options.headers }, ...options };
+  try {
+    const response = await fetch(url, config);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const err = new Error(data.message || data.error || `HTTP ${response.status}`);
+      err.status = response.status; err.data = data;
+      throw err;
+    }
+    return data;
+  } catch (err) {
+    if (err.name === 'TypeError' && err.message.includes('fetch')) {
+      const connErr = new Error(`Unable to reach backend API at ${API_BASE_URL}.`);
+      connErr.status = 0; throw connErr;
+    }
+    throw err;
+  }
+}
+
+export const api = {
+  getBaseUrl: () => API_BASE_URL,
+  getHealth: () => request('/health'),
+  getStats: () => request('/devices/stats'),
+  getDevices: () => request('/devices'),
+  getDeviceById: (id) => request(`/devices/${id}`),
+  registerDevice: (payload) => request('/devices/register', { method: 'POST', body: JSON.stringify(payload) }),
+  sendMessage: (payload) => request('/devices/message', { method: 'POST', body: JSON.stringify(payload) }),
+  simulateFailure: (payload) => request('/devices/failure', { method: 'POST', body: JSON.stringify(payload) }),
+  simulateTimeout: (payload) => request('/devices/timeout', { method: 'POST', body: JSON.stringify(payload) }),
+  reconnectDevice: (id) => request(`/devices/${id}/reconnect`, { method: 'POST' }),
+  getAlerts: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return request(`/alerts${query ? '?' + query : ''}`);
+  },
+  deleteAlert: (id) => request(`/alerts/${id}`, { method: 'DELETE' }),
+  getReadings: (id, limit = 50) => request(`/readings/${id}?limit=${limit}`),
+  getAllRecentReadings: (limit = 50) => request(`/readings?limit=${limit}`),
+  getDeviceHistory: (id) => request(`/history/${id}`),
+};</pre>
+    </div>
+
+    <!-- frontend/src/App.jsx -->
+    <div class="file-wrapper">
+      <div class="file-title">frontend/src/App.jsx</div>
+      <pre class="code-content">import React, { useState, useEffect, useCallback } from 'react';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
+import OverviewDashboard from './pages/OverviewDashboard';
+import DeviceManagementPage from './pages/DeviceManagementPage';
+import SensorMonitoringPage from './pages/SensorMonitoringPage';
+import AlertsPage from './pages/AlertsPage';
+import FsmVisualizerPage from './pages/FsmVisualizerPage';
+import SimulationControlsPage from './pages/SimulationControlsPage';
+import FsmExplanationPage from './pages/FsmExplanationPage';
+import { api, API_BASE_URL } from './services/api';
+
+const VALID_TABS = ['overview', 'devices', 'sensors', 'alerts', 'fsm-visualizer', 'simulation', 'fsm-explanation'];
+const getInitialTab = () => {
+  if (typeof window !== 'undefined' && window.location.hash) {
+    const hash = window.location.hash.replace(/^#\/?/, '').trim();
+    if (VALID_TABS.includes(hash)) return hash;
+  }
+  return 'overview';
+};
+
+export default function App() {
+  const [activeTab, setActiveTabState] = useState(getInitialTab);
+  const [health, setHealth] = useState(null);
+  const [stats, setStats] = useState(null);
+  const [devices, setDevices] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+  const [readings, setReadings] = useState([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState('IOT001');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [serverError, setServerError] = useState(null);
+
+  const setActiveTab = (tab) => {
+    if (VALID_TABS.includes(tab)) {
+      setActiveTabState(tab);
+      if (typeof window !== 'undefined') window.location.hash = `#${tab}`;
+    }
+  };
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace(/^#\/?/, '').trim();
+      if (VALID_TABS.includes(hash)) setActiveTabState(hash);
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  const loadDashboardData = useCallback(async () => {
+    setIsRefreshing(true);
+    try {
+      const healthRes = await api.getHealth().catch(err => { setServerError(err.message); return null; });
+      if (healthRes) {
+        setHealth(healthRes); setServerError(null);
+        if (healthRes.database?.connected) {
+          const [dRes, sRes, aRes, rRes] = await Promise.all([
+            api.getDevices().catch(() => ({ data: [] })),
+            api.getStats().catch(() => ({ data: null })),
+            api.getAlerts({ limit: 50 }).catch(() => ({ data: [] })),
+            api.getAllRecentReadings(50).catch(() => ({ data: [] })),
+          ]);
+          setDevices(dRes.data || []);
+          setStats(sRes.data || null);
+          setAlerts(aRes.data || []);
+          setReadings(rRes.data || []);
+        }
+      }
+    } catch (e) { setServerError(e.message); }
+    finally { setIsRefreshing(false); }
+  }, []);
+
+  useEffect(() => {
+    loadDashboardData();
+    const timer = setInterval(loadDashboardData, 6000);
+    return () => clearInterval(timer);
+  }, [loadDashboardData]);
+
+  return (
+    <div className="flex h-screen bg-slate-100 overflow-hidden font-sans">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} alertCount={alerts.length} />
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
+        <Header health={health} isRefreshing={isRefreshing} onRefresh={loadDashboardData} />
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto pb-8">
+            {activeTab === 'overview' && <OverviewDashboard stats={stats} devices={devices} alerts={alerts} readings={readings} onNavigate={setActiveTab} onSelectDeviceForSimulation={setSelectedDeviceId} />}
+            {activeTab === 'devices' && <DeviceManagementPage devices={devices} onRefresh={loadDashboardData} onSelectDeviceForSimulation={setSelectedDeviceId} onNavigate={setActiveTab} />}
+            {activeTab === 'sensors' && <SensorMonitoringPage devices={devices} selectedDeviceFilter={selectedDeviceId} onRefresh={loadDashboardData} />}
+            {activeTab === 'alerts' && <AlertsPage alerts={alerts} devices={devices} onRefresh={loadDashboardData} />}
+            {activeTab === 'fsm-visualizer' && <FsmVisualizerPage devices={devices} selectedDeviceId={selectedDeviceId} setSelectedDeviceId={setSelectedDeviceId} onRefresh={loadDashboardData} />}
+            {activeTab === 'simulation' && <SimulationControlsPage devices={devices} selectedDeviceId={selectedDeviceId} setSelectedDeviceId={setSelectedDeviceId} onRefresh={loadDashboardData} />}
+            {activeTab === 'fsm-explanation' && <FsmExplanationPage />}
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  );
+}</pre>
+    </div>
+
+    <!-- frontend/vite.config.js -->
+    <div class="file-wrapper">
+      <div class="file-title">frontend/vite.config.js</div>
+      <pre class="code-content">import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  base: process.env.VITE_BASE_PATH || '/IoT-Device-Status-Monitoring-System/',
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: { '/api': { target: 'http://localhost:5000', changeOrigin: true, secure: false } },
+  },
+});</pre>
+    </div>
+
+    <!-- .github/workflows/deploy.yml -->
+    <div class="file-wrapper">
+      <div class="file-title">.github/workflows/deploy.yml</div>
+      <pre class="code-content">name: Deploy Frontend to GitHub Pages
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package.json
+      - name: Validate API URL
+        run: |
+          API_URL="${{ vars.VITE_API_BASE_URL || secrets.VITE_API_BASE_URL }}"
+          if [ -z "$API_URL" ]; then echo "Missing VITE_API_BASE_URL"; exit 1; fi
+      - run: npm ci || npm install
+      - run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || secrets.VITE_API_BASE_URL }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: './frontend/dist'
+      - id: deployment
+        uses: actions/deploy-pages@v4</pre>
+    </div>
+
+  </div>
+
+  <!-- ==================== SECTION 3: OUTPUT SCREENSHOTS (SINGLE COLUMN) ==================== -->
+  <div class="screenshot-page">
+    <h2 class="section-heading">3. OUTPUT SCREENSHOTS & EXPERIMENTAL VERIFICATION</h2>
+    <p><em>(Paste your color printed screenshots inside the respective framed areas below)</em></p>
+
+    <!-- 3.1 Website Dashboard -->
+    <div class="shot-box">
+      <div class="shot-tag">[ PASTE COLOR SCREENSHOT OF OVERVIEW DASHBOARD HERE ]</div>
+      <div class="shot-desc">
+        Shows: Total Registered Devices (3+), Active Devices, Disconnected Devices, Total Telemetry Messages, FSM State Distribution Bars, and "MongoDB Connected" green pulse indicator in the top header.
+      </div>
+    </div>
+    <div class="caption">Figure 3.1: Production React Web Dashboard running live on GitHub Pages with real-time cloud MongoDB Atlas status</div>
+  </div>
+
+  <div class="screenshot-page">
+    <!-- 3.2 Simulation Controls -->
+    <div class="shot-box">
+      <div class="shot-tag">[ PASTE COLOR SCREENSHOT OF SIMULATION CONTROLS DECK HERE ]</div>
+      <div class="shot-desc">
+        Shows: Left simulation buttons (Send Valid Message, Invalid Temp 200°C, Simulate Failure, Simulate Timeout, Reconnect) and Right Dark Terminal Inspector showing HTTP 200 OK / HTTP 400 Bad Request JSON responses.
+      </div>
+    </div>
+    <div class="caption">Figure 3.2: Execution of Valid and Invalid telemetry injections demonstrating state preservation and alert logging</div>
+
+    <!-- 3.3 Automata FSM Visualizer -->
+    <div class="shot-box" style="margin-top: 25px;">
+      <div class="shot-tag">[ PASTE COLOR SCREENSHOT OF FSM VISUALIZER TAB HERE ]</div>
+      <div class="shot-desc">
+        Shows: Three Automata Nodes (Registered q0, Active F, Disconnected) with active device state highlighted with glowing ring, and chronological transition history audit table at the bottom.
+      </div>
+    </div>
+    <div class="caption">Figure 3.3: Real-time visual representation of Deterministic Finite Automaton state transitions</div>
+  </div>
+
+  <div class="screenshot-page">
+    <!-- 3.4 MongoDB Atlas Cloud Database -->
+    <div class="shot-box">
+      <div class="shot-tag">[ PASTE COLOR SCREENSHOT OF MONGODB ATLAS DATA EXPLORER HERE ]</div>
+      <div class="shot-desc">
+        Shows: Database <code>iot_monitoring</code> (or <code>test</code>) with all 4 collections: <code>devices</code>, <code>sensorreadings</code>, <code>alerts</code>, and <code>deviceevents</code> containing live persisted documents.
+      </div>
+    </div>
+    <div class="caption">Figure 3.4: MongoDB Atlas Cloud Data Explorer verifying persistent data storage</div>
+
+    <!-- ==================== SECTION 4 & 5: GITHUB LINKS & SCREENSHOTS ==================== -->
+    <h2 class="section-heading" style="margin-top: 20px;">4. GITHUB AND CLOUD DEPLOYMENT URLS</h2>
+    <table class="link-table">
+      <tr>
+        <th style="width: 32%;">Resource</th>
+        <th style="width: 25%;">Platform</th>
+        <th style="width: 43%;">URL</th>
+      </tr>
+      <tr>
+        <td><strong>GitHub Repository Link</strong></td>
+        <td>GitHub</td>
+        <td><code class="url">https://github.com/Dhanusheyap755/IoT-Device-Status-Monitoring-System</code></td>
+      </tr>
+      <tr>
+        <td><strong>Live Website (Frontend)</strong></td>
+        <td>GitHub Pages</td>
+        <td><code class="url">https://dhanusheyap755.github.io/IoT-Device-Status-Monitoring-System/</code></td>
+      </tr>
+      <tr>
+        <td><strong>Backend REST API</strong></td>
+        <td>Render (Web Service)</td>
+        <td><code class="url">https://iot-monitoring-backend-p9h0.onrender.com</code></td>
+      </tr>
+      <tr>
+        <td><strong>Backend Health Check</strong></td>
+        <td>Render API Endpoint</td>
+        <td><code class="url">https://iot-monitoring-backend-p9h0.onrender.com/api/health</code></td>
+      </tr>
+      <tr>
+        <td><strong>Cloud Database Cluster</strong></td>
+        <td>MongoDB Atlas</td>
+        <td><code class="url">mongodb+srv://cluster0.pimkevk.mongodb.net/iot_monitoring</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="screenshot-page">
+    <h2 class="section-heading">5. GITHUB REPOSITORY SCREENSHOTS</h2>
+
+    <div class="shot-box" style="min-height: 270px;">
+      <div class="shot-tag">[ PASTE SCREENSHOT OF GITHUB REPOSITORY MAIN PAGE HERE ]</div>
+      <div class="shot-desc">
+        Shows: Repository <code>Dhanusheyap755/IoT-Device-Status-Monitoring-System</code>, branch <code>main</code>, latest commit, and directory structure (.github, backend, frontend, documentation, sample-inputs).
+      </div>
+    </div>
+    <div class="caption">Figure 5.1: GitHub Repository showing full source tree and commit logs</div>
+
+    <div class="shot-box" style="min-height: 270px; margin-top: 20px;">
+      <div class="shot-tag">[ PASTE SCREENSHOT OF GITHUB ACTIONS WORKFLOW RUN HERE ]</div>
+      <div class="shot-desc">
+        Shows: GitHub Actions tab with green checkmark (✔) for "Deploy Frontend to GitHub Pages" indicating successful automated CI/CD deployment.
+      </div>
+    </div>
+    <div class="caption">Figure 5.2: Automated GitHub Actions CI/CD pipeline deploying frontend to GitHub Pages</div>
+  </div>
+
+</body>
+</html>
