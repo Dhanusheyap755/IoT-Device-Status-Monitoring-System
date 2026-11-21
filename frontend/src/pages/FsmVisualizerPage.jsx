@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StatusPill from '../components/StatusPill';
 import { FsmIcon, RefreshCwIcon, ClockIcon } from '../components/Icons';
+import FsmDiagramSection from '../components/FsmDiagramSection';
 import { api } from '../services/api';
 
 export default function FsmVisualizerPage({
@@ -77,16 +78,24 @@ export default function FsmVisualizerPage({
         </div>
       </div>
 
-      {/* Interactive State Graph */}
+      {/* Full State & Transition Diagrams */}
+      <FsmDiagramSection
+        devices={devices}
+        selectedDeviceId={currentDevice?.deviceId}
+        setSelectedDeviceId={setSelectedDeviceId}
+        defaultView="both"
+      />
+
+      {/* State Breakdown Detail Cards */}
       <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs">
         <div className="flex items-center justify-between mb-4 border-b pb-3">
           <div>
             <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
               <FsmIcon size={18} className="text-blue-600" />
-              Automaton State Map for Device: <span className="text-blue-700 font-mono">{currentDevice?.deviceId || 'N/A'}</span>
+              Automaton Node Status for Device: <span className="text-blue-700 font-mono">{currentDevice?.deviceId || 'N/A'}</span>
             </h3>
             <p className="text-xs text-gray-500">
-              Highlighted node indicates the active runtime state in MongoDB
+              Active operational status and incoming transition triggers
             </p>
           </div>
           <div>
@@ -95,7 +104,7 @@ export default function FsmVisualizerPage({
         </div>
 
         {/* Visual Graph Diagram */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-2 relative">
           {/* State 1: Registered (q0) */}
           <div
             className={`p-6 rounded-2xl border-2 transition-all duration-300 relative ${

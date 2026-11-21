@@ -2,6 +2,7 @@ import React from 'react';
 import MetricCard from '../components/MetricCard';
 import StatusPill from '../components/StatusPill';
 import AlertBadge from '../components/AlertBadge';
+import FsmDiagramSection from '../components/FsmDiagramSection';
 import {
   DevicesIcon,
   WifiIcon,
@@ -16,6 +17,8 @@ export default function OverviewDashboard({
   devices,
   alerts,
   readings,
+  selectedDeviceId,
+  setSelectedDeviceId,
   onNavigate,
   onSelectDeviceForSimulation,
 }) {
@@ -87,6 +90,14 @@ export default function OverviewDashboard({
           onClick={() => onNavigate('alerts')}
         />
       </div>
+
+      {/* FSM Automata Architecture: State Diagram & Transition Diagram */}
+      <FsmDiagramSection
+        devices={devices}
+        selectedDeviceId={selectedDeviceId}
+        setSelectedDeviceId={setSelectedDeviceId}
+        defaultView="both"
+      />
 
       {/* State Distribution & Quick Controls */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

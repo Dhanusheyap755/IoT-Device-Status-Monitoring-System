@@ -172,6 +172,8 @@ export default function App() {
                 devices={devices}
                 alerts={alerts}
                 readings={readings}
+                selectedDeviceId={selectedDeviceId}
+                setSelectedDeviceId={handleSelectDevice}
                 onNavigate={setActiveTab}
                 onSelectDeviceForSimulation={handleSelectDevice}
               />
