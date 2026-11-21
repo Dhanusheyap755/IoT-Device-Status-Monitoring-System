@@ -285,16 +285,19 @@
 
   <!-- ==================== SECTION 1: PATH ==================== -->
   <div class="page-break"></div>
-  <h2 class="section-heading">1. PATH OF FILES AND FOLDERS</h2>
+  <h2 class="section-heading">1. PATH OF FILES AND FOLDERS (CUSTOM DEVELOPED SOURCE CODE ONLY)</h2>
   <pre class="path-tree">IoT-Device-Status-Monitoring-System/
-├── .github/workflows/deploy.yml                      # GitHub Actions CI/CD to GitHub Pages
+├── .github/workflows/
+│   └── deploy.yml                                    # GitHub Actions CI/CD to GitHub Pages
 ├── backend/
-│   ├── config/db.js                                  # MongoDB Atlas Cloud Database connection logic
+│   ├── config/
+│   │   └── db.js                                     # MongoDB Atlas Cloud Database connection logic
 │   ├── controllers/
 │   │   ├── alertController.js                        # Alert query & dismissal handlers
 │   │   ├── deviceController.js                       # Device state, CRUD, & simulation endpoints
 │   │   └── readingController.js                      # Time-series telemetry querying
-│   ├── fsm/deviceStateMachine.js                     # FLAT Deterministic Finite Automaton Engine
+│   ├── fsm/
+│   │   └── deviceStateMachine.js                     # FLAT Deterministic Finite Automaton Engine
 │   ├── middleware/
 │   │   ├── errorHandler.js                           # Centralized error handler & DB readiness guard
 │   │   └── validateMessage.js                        # Ingestion payload schema validation middleware
@@ -307,47 +310,36 @@
 │   │   ├── alertRoutes.js                            # Express REST endpoints for alerts
 │   │   ├── deviceRoutes.js                           # Express REST endpoints for device & simulation
 │   │   └── readingRoutes.js                          # Express REST endpoints for telemetry
-│   ├── seed/seedData.js                              # Database seeder (IOT001, IOT002, IOT003)
-│   ├── .env.example                                  # Template for environment configuration
-│   ├── package.json                                  # Backend dependencies and startup scripts
+│   ├── seed/
+│   │   └── seedData.js                               # Database seeder (IOT001, IOT002, IOT003)
+│   ├── test/
+│   │   ├── api.test.js                               # Integration tests for REST endpoints
+│   │   ├── fsm.test.js                               # Unit tests for FSM transitions
+│   │   └── validation.test.js                        # Unit tests for sensor validation
 │   └── server.js                                     # Express entry point with 0.0.0.0 & CORS binding
-├── frontend/
-│   ├── public/favicon.svg                            # Application vector branding icon
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── AlertBadge.jsx                        # Severity badges (Info, Warning, Error)
-│   │   │   ├── Footer.jsx                            # Professional attribution footer (Reg: 24ITR018)
-│   │   │   ├── Header.jsx                            # Header with real-time MongoDB connectivity pulse
-│   │   │   ├── Icons.jsx                             # Self-contained SVG icon components
-│   │   │   ├── MetricCard.jsx                        # Executive summary KPI cards
-│   │   │   ├── Sidebar.jsx                           # Left navigation drawer
-│   │   │   └── StatusPill.jsx                        # Automata state indicator pills
-│   │   ├── pages/
-│   │   │   ├── AlertsPage.jsx                        # Exception and failure audit logs
-│   │   │   ├── DeviceManagementPage.jsx              # Device registration with format validation
-│   │   │   ├── FsmExplanationPage.jsx                # Theoretical FLAT automata specification
-│   │   │   ├── FsmVisualizerPage.jsx                 # Interactive automata node visualizer
-│   │   │   ├── OverviewDashboard.jsx                 # System metrics and status distribution
-│   │   │   ├── SensorMonitoringPage.jsx              # Telemetry readings with units (°C, % RH)
-│   │   │   └── SimulationControlsPage.jsx            # Live HTTP simulation deck & response inspector
-│   │   ├── services/api.js                           # Frontend API client supporting VITE_API_BASE_URL
-│   │   ├── App.css                                   # Global layout adjustments
-│   │   ├── App.jsx                                   # Main React component with URL hash routing
-│   │   ├── index.css                                 # Modern scrollbar & CSS utility rules
-│   │   └── main.jsx                                  # React DOM mounting entry point
-│   ├── index.html                                    # HTML5 Single Page Application shell
-│   ├── package.json                                  # Frontend dependencies (React 19, Vite)
-│   └── vite.config.js                                # Base path /IoT-Device-Status-Monitoring-System/
-├── sample-inputs/
-│   ├── communication-failure.json                    # Simulated packet drop payload
-│   ├── invalid-humidity.json                         # Out-of-bounds humidity (150%)
-│   ├── invalid-temperature.json                      # Out-of-bounds temperature (200°C)
-│   ├── missing-field.json                            # Payload missing mandatory deviceId
-│   ├── timeout.json                                  # Heartbeat timeout (45s) payload
-│   ├── unknown-device.json                           # Unregistered device ID payload
-│   └── valid-message.json                            # Authentic sensor telemetry payload
-├── .gitignore                                        # Excludes node_modules, build artifacts, & secrets
-└── README.md                                         # Comprehensive documentation & setup instructions</pre>
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   │   ├── AlertBadge.jsx                        # Severity badges (Info, Warning, Error)
+    │   │   ├── Footer.jsx                            # Professional attribution footer (Reg: 24ITR018)
+    │   │   ├── Header.jsx                            # Header with real-time MongoDB connectivity pulse
+    │   │   ├── Icons.jsx                             # Self-contained SVG icon components
+    │   │   ├── MetricCard.jsx                        # Executive summary KPI cards
+    │   │   ├── Sidebar.jsx                           # Left navigation drawer
+    │   │   └── StatusPill.jsx                        # Automata state indicator pills
+    │   ├── pages/
+    │   │   ├── AlertsPage.jsx                        # Exception and failure audit logs
+    │   │   ├── DeviceManagementPage.jsx              # Device registration with format validation
+    │   │   ├── FsmExplanationPage.jsx                # Theoretical FLAT automata specification
+    │   │   ├── FsmVisualizerPage.jsx                 # Interactive automata node visualizer
+    │   │   ├── OverviewDashboard.jsx                 # System metrics and status distribution
+    │   │   ├── SensorMonitoringPage.jsx              # Telemetry readings with units (°C, % RH)
+    │   │   └── SimulationControlsPage.jsx            # Live HTTP simulation deck & response inspector
+    │   ├── services/
+    │   │   └── api.js                                # Frontend API client supporting VITE_API_BASE_URL
+    │   ├── App.css                                   # Custom dashboard styling & FSM animation rules
+    │   └── App.jsx                                   # Main React component with URL hash routing
+    └── vite.config.js                                # Base path /IoT-Device-Status-Monitoring-System/</pre>
 
   <!-- ==================== SECTION 2: CODE (TWO COLUMNS PER A4) ==================== -->
   <div class="page-break"></div>
